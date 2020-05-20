@@ -1,3 +1,28 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+home:
+    path: /
+    controller: App\Controller\DefaultController::home
+
+about:
+    path : /about
+    controller: App\Controller\DefaultController::about
+
+login:
+    path : /login
+    controller: App\Controller\DefaultController::login
+
+markets:
+    path: /markets
+    controller: App\Controller\DefaultController::markets
+
+market:
+    path: /market
+    controller: App\Controller\DefaultController::market
+
+informations:
+    path: /informations
+    controller: App\Controller\DefaultController::informations
+
+
+
+
+
