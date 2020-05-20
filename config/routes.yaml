@@ -1,26 +1,26 @@
 home:
     path: /
-    controller: App\Controller\DefaultController::home
+    controller: App\Controller\DefaultController::homeAction
 
 about:
     path : /about
-    controller: App\Controller\DefaultController::about
+    controller: App\Controller\DefaultController::aboutAction
 
 login:
     path : /login
-    controller: App\Controller\DefaultController::login
+    controller: App\Controller\DefaultController::loginAction
 
 markets:
     path: /markets
-    controller: App\Controller\DefaultController::markets
+    controller: App\Controller\DefaultController::marketsAction
 
 market:
     path: /market
-    controller: App\Controller\DefaultController::market
+    controller: App\Controller\DefaultController::marketAction
 
 informations:
-    path: /informations
-    controller: App\Controller\DefaultController::informations
+    path: /user/informations
+    controller: App\Controller\DefaultController::informationsAction
 
 
 
