@@ -9,12 +9,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class DefaultController extends AbstractController
 {
     public function home(){
-        return $this->render('pages/home.html.twig');
+        return $this->render('pages/public/home.html.twig');
     }
 
 
     public function about(){
-        return $this->render('/pages/about.html.twig');
+        return $this->render('/pages/public/about.html.twig');
     }
 
     public function login(){
