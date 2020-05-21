@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -15,9 +17,9 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('alias')
-            ->add('email')
-            ->add('region')
+            ->add('alias', TextType::class)
+            ->add('email', EmailType::class)
+            ->add('region',TextType::class)
 
             ->add('password' , RepeatedType::class, [
                 'type' => PasswordType::class,
