@@ -94,12 +94,13 @@ class AppFixtures extends Fixture
 
         // Fixtures pour des stands
 
+
+
         $standJeanne = new Stand();
         $standJeanne->setName('Stand de Jeanne');
+        $standJeanne->addType($this->getReference($typeFruits));
         $manager->persist($standJeanne);
         $manager->flush();
-
-        $this->referenceRepository->setReference('Fruits', $standJeanne);
 
         $standGilbert = new Stand();
         $standGilbert->setName('Stand de Gilbert');
@@ -115,7 +116,6 @@ class AppFixtures extends Fixture
         // Fixtures pour des types
 
         $typeFruits = new Type();
-        $typeFruits->setName('Fruits');
         $manager->persist($typeFruits);
         $manager->flush();
 
