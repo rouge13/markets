@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200519202627 extends AbstractMigration
+final class Version20200521090325 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -23,14 +23,14 @@ final class Version20200519202627 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('CREATE TABLE comment_market (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, market_id INT NOT NULL, notice VARCHAR(255) NOT NULL, INDEX IDX_A1BFDDD9A76ED395 (user_id), INDEX IDX_A1BFDDD9622F3F37 (market_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE day (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE day (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE market (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, track VARCHAR(255) NOT NULL, pc INT NOT NULL, city VARCHAR(255) NOT NULL, region VARCHAR(255) NOT NULL, time_from INT NOT NULL, time_to INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE market_day (market_id INT NOT NULL, day_id INT NOT NULL, INDEX IDX_36ABCB33622F3F37 (market_id), INDEX IDX_36ABCB339C24126 (day_id), PRIMARY KEY(market_id, day_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE market_stand (market_id INT NOT NULL, stand_id INT NOT NULL, INDEX IDX_AF97A7C3622F3F37 (market_id), INDEX IDX_AF97A7C39734D487 (stand_id), PRIMARY KEY(market_id, stand_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE stand (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, description LONGTEXT DEFAULT NULL, link LONGTEXT DEFAULT NULL, image VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE stand_type (stand_id INT NOT NULL, type_id INT NOT NULL, INDEX IDX_10CFCECA9734D487 (stand_id), INDEX IDX_10CFCECAC54C8C93 (type_id), PRIMARY KEY(stand_id, type_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE type (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, image VARCHAR(255) DEFAULT NULL, region VARCHAR(255) NOT NULL, role VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, email VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, alias VARCHAR(255) NOT NULL, image VARCHAR(255) DEFAULT NULL, region VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE comment_market ADD CONSTRAINT FK_A1BFDDD9A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
         $this->addSql('ALTER TABLE comment_market ADD CONSTRAINT FK_A1BFDDD9622F3F37 FOREIGN KEY (market_id) REFERENCES market (id)');
         $this->addSql('ALTER TABLE market_day ADD CONSTRAINT FK_36ABCB33622F3F37 FOREIGN KEY (market_id) REFERENCES market (id) ON DELETE CASCADE');
