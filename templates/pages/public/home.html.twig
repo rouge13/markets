@@ -12,9 +12,28 @@
 
         </div>
 
-
     </div>
 
+    <div class="row justify-content-around">
+        <h1 class="col-md-12"> Les derniers marchés   </h1>
+        {%  for market in markets %}
+            <div class="card mt-4" style="width: 20rem;">
+                <img class="card-img-top" src="https://storage.needpix.com/rsynced_images/fruit-2954698_1280.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ market.name }}</h5>
+                    <p class="card-text">
+                     <p> Track:   {{ market.track }}</p>
+                     <p>  Code Postal:   {{ market.pc }}</p>
+                     <p> Ville:   {{ market.city }} </p>
+                    <p> Region:  {{ market.region }}</p>
+                    <p> Ouvre à   {{ market.timeFrom }}h
+                     Ferme à  {{ market.timeTo  }}h  </p>
+                    </p>
+                </div>
+            </div>
+        {%  endfor %}
+
+    </div>
 
 {%  endblock %}
 
