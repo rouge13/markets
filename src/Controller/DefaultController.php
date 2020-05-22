@@ -5,15 +5,18 @@ namespace App\Controller;
 
 
 use App\Entity\Contact;
-use App\Entity\Market;
+use App\Repository\MarketRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DefaultController extends AbstractController
 {
-    public function homeAction(){
-        return $this->render('pages/public/home.html.twig');
-    }
+    public function homeAction(MarketRepository $marketRepository){
+        $markets = $marketRepository->findBy(array(),array(),4);
+        return $this->render('pages/public/home.html.twig',[
+            'markets'=>$markets
+        ]);
+        }
 
 
     public function aboutAction(Request $request){
@@ -37,17 +40,7 @@ class DefaultController extends AbstractController
     }
 
     public function marketsAction(Request $request){
-
-        $market = new Market();
-
-        //je crée mon formulaire basé sur l'entité market
-        $searchMarketForm = $this->createForm('App\Form\SearchMarketType', $market);
-
-        return $this->render(
-            'pages/public/markets.html.twig', [
-            "searchMarketForm" => $searchMarketForm->createView()
-        ]);
-
+        return $this->render('pages/public/markets.html.twig');
     }
 
     public function marketAction(){
