@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Entity\Contact;
+use App\Entity\Market;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -35,8 +36,18 @@ class DefaultController extends AbstractController
         return $this->render('pages/public/login.html.twig');
     }
 
-    public function marketsAction(){
-        return $this->render('pages/public/markets.html.twig');
+    public function marketsAction(Request $request){
+
+        $market = new Market();
+
+        //je crée mon formulaire basé sur l'entité market
+        $searchMarketForm = $this->createForm('App\Form\SearchMarketType', $market);
+
+        return $this->render(
+            'pages/public/markets.html.twig', [
+            "searchMarketForm" => $searchMarketForm->createView()
+        ]);
+
     }
 
     public function marketAction(){
