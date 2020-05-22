@@ -22,6 +22,9 @@ informations:
     path: /user/informations
     controller: App\Controller\DefaultController::informationsAction
 
+addNewObject:
+    path: /add/{name}
+    controller: App\Controller\NewObjectController::newObjectAction
 
 
 
