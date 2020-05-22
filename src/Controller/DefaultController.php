@@ -5,14 +5,18 @@ namespace App\Controller;
 
 
 use App\Entity\Contact;
+use App\Repository\MarketRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DefaultController extends AbstractController
 {
-    public function homeAction(){
-        return $this->render('pages/public/home.html.twig');
-    }
+    public function homeAction(MarketRepository $marketRepository){
+        $markets = $marketRepository->findBy(array(),array(),4);
+        return $this->render('pages/public/home.html.twig',[
+            'markets'=>$markets
+        ]);
+        }
 
 
     public function aboutAction(Request $request){
