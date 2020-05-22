@@ -1,0 +1,12 @@
+{% extends 'pages/public/base.html.twig' %}
+
+{% block body %}
+    <div class="container ">
+
+        <div class="col-5 form m-4 rounded">
+            <h2 class="text-center" style="font-style: italic; color: white">Formulaire de : {{ name }}</h2>
+            {{ form(form) }}
+        </div>
+    </div>
+
+{% endblock %}
