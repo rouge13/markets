@@ -5,28 +5,14 @@
 
 
 {% block body %}
-<p>markets</p>
+    <p>markets</p>
 
-{{ form(searchMarketForm) }}
+    {{ form(searchMarketForm) }}
 
     {% for market in markets %}
 
-        {% for element in market %}
-
-            <p>Nom: {{ element.name }}</p>
-
-
-            <p>{% for day in element.day %}
-                    Jour : {{ day.name }}
-                {% endfor %}
-            </p>
-
-
-        {% endfor %}
+        <p>Nom: {{ market.name }}</p>
 
     {% endfor %}
 
 {% endblock %}
-
-
-
