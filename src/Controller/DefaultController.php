@@ -41,8 +41,13 @@ class DefaultController extends AbstractController
 
 
 
-    public function marketAction(){
-        return $this->render('pages/public/market.html.twig');
+    public function marketAction($id,MarketRepository $marketRepository){
+        $market=$marketRepository->findOneBy([
+            'id'=>$id
+        ]);
+        return $this->render('pages/public/market.html.twig',[
+            'market'=>$market
+        ]);
 
     }
 

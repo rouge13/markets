@@ -1,8 +1,33 @@
 {% extends 'pages/public/base.html.twig' %}
 
 {% block body %}
-<p>market</p>
-    
+
+    <div class="p-4">
+        <h1> {{ market.name}} </h1>
+        <div class="row">
+            <h3 class="col-md-6"> Jour(s)  </h3>
+            <h3 class="col-md-6"> Adresse: {{ market.region}} {{ market.city}} {{ market.pc}} {{ market.track}}  </h3>
+
+
+        </div>
+
+        <div class="row">
+
+            <h3 class="col-md-6"> Horaires: {{market.timeFrom}}h - {{ market.timeTo}}h </h3>
+
+        </div>
+
+        <div class="row">
+
+            <H3 class="col-md-6">  Liste des marchands </H3>
+
+        </div>
+
+    </div>
+
+
+
+
 {% endblock %}
 
 {% block title %}
