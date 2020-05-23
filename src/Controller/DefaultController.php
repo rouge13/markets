@@ -39,9 +39,7 @@ class DefaultController extends AbstractController
         return $this->render('pages/public/login.html.twig');
     }
 
-    public function marketsAction(){
-        return $this->render('pages/public/markets.html.twig');
-    }
+
 
     public function marketAction(){
         return $this->render('pages/public/market.html.twig');
@@ -50,5 +48,45 @@ class DefaultController extends AbstractController
 
     public function informationsAction(){
         return $this->render('pages/public/informations.html.twig');
+    }
+
+    public function marketsAction(Request $request  , MarketRepository $marketRepository){
+
+        // build the form
+
+        $searchMarketForm = $this->createForm('App\Form\SearchMarketType');
+        $searchMarketForm->handleRequest($request);
+
+        $markets = array();
+
+        if($searchMarketForm->isSubmitted()  && $searchMarketForm->isValid() ){
+            $criteria = $searchMarketForm->getData();
+//            foreach($criteria->getDay() as $day){
+//                dump($day->getName());
+ //           }
+
+
+            foreach($criteria->getDay() as $day) {
+                $market = $marketRepository->findByCityAndDay($criteria,$day);
+                array_push($markets , $market);
+            }
+            array_unique(array($markets));
+
+            dump($markets);
+
+
+
+//            return $this->render( 'pages/public/markets.html.twig',[
+//                "markets"=> $markets
+//            ]);
+        }
+
+
+        return $this->render(
+            'pages/public/markets.html.twig', [
+            "searchMarketForm" => $searchMarketForm->createView(),
+                "markets"=>$markets
+        ]);
+
     }
 }

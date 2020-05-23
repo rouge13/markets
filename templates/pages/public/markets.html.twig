@@ -1,10 +1,32 @@
 {% extends 'pages/public/base.html.twig' %}
-
-{% block body %}
-<p>markets</p>
-{% endblock %}
-
 {% block title %}
 
 {% endblock %}
+
+
+{% block body %}
+<p>markets</p>
+
+{{ form(searchMarketForm) }}
+
+    {% for market in markets %}
+
+        {% for element in market %}
+
+            <p>Nom: {{ element.name }}</p>
+
+
+            <p>{% for day in element.day %}
+                    Jour : {{ day.name }}
+                {% endfor %}
+            </p>
+
+
+        {% endfor %}
+
+    {% endfor %}
+
+{% endblock %}
+
+
 
