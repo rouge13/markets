@@ -19,6 +19,7 @@ class SearchMarketType extends AbstractType
 
             ->add('city')
             ->add('day', EntityType::class , ['class' => Day::class, 'multiple'=>true, 'expanded'=>true , 'choice_label' => 'name'])
+
             ->add('save', SubmitType::class);
     }
 

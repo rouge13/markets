@@ -23,18 +23,17 @@ class MarketRepository extends ServiceEntityRepository
     //  * @return Market[] Returns an array of Market objects
     //  */
 
-    public function findByCityAndDay($criteria)
+    public function findByCityAndDay($criteria,$day)
     {
-        return $this->createQueryBuilder('m')
-            -> where('m.city = :city')
-            ->setParameter('city', $criteria->getCity())
-
-
-
-            ->getQuery()
-            ->getResult()
-        ;
-    }
+            return $this->createQueryBuilder('m')
+                ->join('m.day', 'd')
+                ->where('d.name = :day')
+                ->setParameter('day', $day->getName())
+                ->andWhere('m.city = :city')
+                ->setParameter('city', $criteria->getCity())
+                ->getQuery()
+                ->getResult();
+        }
 
 
     /*
