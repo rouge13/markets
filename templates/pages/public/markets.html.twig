@@ -6,18 +6,60 @@ Rechercher un marché
 
 {% block body %}
     <h2>Recherches</h2>
+<div class="p-2">
+    {{ form_start(searchMarketForm , {'attr': {'class': 'd-flex col-12 align-items-center justify-content-between'  }}) }}
 
-    {{ form(searchMarketForm) }}
+    <div class="form-group col pt-4">
+        Quelle ville ?
+        {{ form_widget(searchMarketForm.city) }}
+    </div>
+
+    <div class="form-button col ">
+        Quels jour(s) ?
+        {{ form_widget(searchMarketForm.day ) }}
+
+    </div>
+
+    <div class="form-group pt-5  ">
+        {{ form_widget(searchMarketForm.rechercher) }}
+    </div>
+
+    {{ form_end(searchMarketForm) }}
+
+</div>
 
     {% if app.request.method == 'POST' %}
         {% if markets |length > 0 %}
+            <p class="font-italic">Résultats pour votre recherche</p>
 
-            {% for market in markets %}
-                <p>Nom: {{ market.name }}</p>
-            {% endfor %}
+            <table class="table table-hover ">
+                <thead>
+                <tr>
+                    <th scope="col">Nom du marché</th>
+                    <th scope="col">Adresse</th>
+                    <th scope="col">Code postal</th>
+                    <th scope="col">Ville </th>
+                    <th> </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for market in markets %}
+                <tr>
+                    <td>{{ market.name }}</td>
+                    <td>{{ market.track }}</td>
+                    <td>{{ market.pc }}</td>
+                    <td> {{ market.city }}</td>
+                </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
 
             {% else %}
-            <p>Aucun résultat(s) pour votre recherche</p>
+                <p class="text-secondary" role="">
+                    Aucun résultat(s) pour votre recherche
+                </p>
+
         {% endif  %}
     {% endif %}
 

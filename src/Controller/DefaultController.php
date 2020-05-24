@@ -67,14 +67,12 @@ class DefaultController extends AbstractController
                 $market = $marketRepository->findByCityAndDay($criteria, $day);
                 //dump($market);
                 foreach ($market as $obj) {
-                    //dump($obj);
+                    dump($obj);
                     array_push($markets, $obj);
                 }
                 //dump($markets);
             }
         }
-
-        //dump(array_unique($markets, SORT_REGULAR));
 
         return $this->render(
             'pages/public/markets.html.twig', [
