@@ -50,7 +50,6 @@ class DefaultController extends AbstractController
     public function marketsAction(Request $request  , MarketRepository $marketRepository){
 
         // build the form
-
         $searchMarketForm = $this->createForm('App\Form\SearchMarketType');
         $searchMarketForm->handleRequest($request);
 

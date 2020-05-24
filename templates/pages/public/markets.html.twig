@@ -1,18 +1,24 @@
 {% extends 'pages/public/base.html.twig' %}
 {% block title %}
-
+Rechercher un marché
 {% endblock %}
 
 
 {% block body %}
-    <p>markets</p>
+    <h2>Recherches</h2>
 
     {{ form(searchMarketForm) }}
 
-    {% for market in markets %}
+    {% if app.request.method == 'POST' %}
+        {% if markets |length > 0 %}
 
-        <p>Nom: {{ market.name }}</p>
+            {% for market in markets %}
+                <p>Nom: {{ market.name }}</p>
+            {% endfor %}
 
-    {% endfor %}
+            {% else %}
+            <p>Aucun résultat(s) pour votre recherche</p>
+        {% endif  %}
+    {% endif %}
 
 {% endblock %}
