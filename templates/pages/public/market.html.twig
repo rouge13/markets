@@ -5,7 +5,7 @@
     <div class="p-4">
         <h1> {{ market.name}} </h1>
         <div class="row">
-            <h3 class="col-md-6"> Jour(s)  </h3>
+            <h3 class="col-md-6"> Jour(s)  {% for day in market.day  %} {{ day.name }},  {% endfor %}</h3>
             <h3 class="col-md-6"> Adresse: {{ market.region}} {{ market.city}} {{ market.pc}} {{ market.track}}  </h3>
 
 
@@ -25,7 +25,37 @@
 
     </div>
 
+   <div class="row justify-content-center">
 
+       <table class="col-md-6 table">
+           <thead>
+           <tr>
+               <th scope="col">Nom de l'exposant</th>
+               <th scope="col">Type de produits</th>
+
+           </tr>
+           </thead>
+           <tbody>
+
+
+           {% for onestand in market.stand  %} <tr>
+               <th scope="row">
+                   {{ onestand.name }} </th>
+
+
+               <td>
+                   {% for onetype in onestand.type  %}
+                       {{ onetype.name }}
+                   {% endfor %} </td>
+           </tr>
+           {% endfor %}
+
+
+
+           </tbody>
+       </table>
+
+   </div>
 
 
 {% endblock %}
