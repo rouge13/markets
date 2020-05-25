@@ -25,9 +25,9 @@
 
     </div>
 
-   <div class="row justify-content-center">
+   <div class="row justify-content-center my-5">
 
-       <table class="col-md-6 table">
+       <table class="col-md-6 table border">
            <thead>
            <tr>
                <th scope="col">Nom de l'exposant</th>
@@ -56,6 +56,42 @@
        </table>
 
    </div>
+
+
+    <div class="row justify-content-center">
+        <h2 class="col-md-12 text-center"> Avis  </h2>
+        {% for comment in market.commentMarkets %}
+        <div class="col-8 my-2">
+            <div class="p-2 card card-white post">
+                <div class="post-heading">
+                    <div class="float-left image">
+
+                    </div>
+                    <div class="float-left meta">
+                        <div class="text-dark title h5">
+                          <b>{{ comment.user.alias }}</b>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-dark post-description p-2">
+                    <p>{{ comment.notice }}</p>
+                </div>
+            </div>
+        </div>
+
+         {% endfor %}
+
+    </div>
+    
+    <div>
+
+        
+    </div>
+
+
+
+
 
 
 {% endblock %}
