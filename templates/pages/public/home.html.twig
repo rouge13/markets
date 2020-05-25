@@ -30,8 +30,24 @@
                      Ferme à  {{ market.timeTo  }}h  </p>
                     </p>
                 </div>
+
+
+                <br><br>
+
             </div>
+
+
         {%  endfor %}
+
+    </div>
+
+        <div class="ml-4">
+                {%  for market in markets %}
+                    <a  href="{{ path('market',{id: market.id}) }}"> <p> {{ market.name}}</p> </a>
+                {% endfor  %}
+
+            </div>
+
 
     </div>
 
