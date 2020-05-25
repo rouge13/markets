@@ -15,7 +15,7 @@ markets:
     controller: App\Controller\DefaultController::marketsAction
 
 market:
-    path: /market
+    path: /market/{id}
     controller: App\Controller\DefaultController::marketAction
 
 informations:

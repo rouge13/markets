@@ -1,8 +1,103 @@
 {% extends 'pages/public/base.html.twig' %}
 
 {% block body %}
-<p>market</p>
+
+    <div class="p-4">
+        <h1> {{ market.name}} </h1>
+        <div class="row">
+            <h3 class="col-md-6"> Jour(s)  {% for day in market.day  %} {{ day.name }},  {% endfor %}</h3>
+            <h3 class="col-md-6"> Adresse: {{ market.region}} {{ market.city}} {{ market.pc}} {{ market.track}}  </h3>
+
+
+        </div>
+
+        <div class="row">
+
+            <h3 class="col-md-6"> Horaires: {{market.timeFrom}}h - {{ market.timeTo}}h </h3>
+
+        </div>
+
+        <div class="row">
+
+            <H3 class="col-md-6">  Liste des marchands </H3>
+
+        </div>
+
+    </div>
+
+   <div class="row justify-content-center my-5">
+
+       <table class="col-md-6 table border">
+           <thead>
+           <tr>
+               <th scope="col">Nom de l'exposant</th>
+               <th scope="col">Type de produits</th>
+
+           </tr>
+           </thead>
+           <tbody>
+
+
+           {% for onestand in market.stand  %} <tr>
+               <th scope="row">
+                   {{ onestand.name }} </th>
+
+
+               <td>
+                   {% for onetype in onestand.type  %}
+                       {{ onetype.name }}
+                   {% endfor %} </td>
+           </tr>
+           {% endfor %}
+
+
+
+           </tbody>
+       </table>
+
+   </div>
+
+
+    <div class="row justify-content-center">
+        <h2 class="col-md-12 text-center"> Avis  </h2>
+        {% for comment in market.commentMarkets %}
+        <div class="col-8 my-2">
+            <div class="p-2 card card-white post">
+                <div class="post-heading">
+                    <div class="float-left image">
+
+                    </div>
+                    <div class="float-left meta">
+                        <div class="text-dark title h5">
+                          <b>{{ comment.user.alias }}</b>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-dark post-description p-2">
+                    <p>{{ comment.notice }}</p>
+                </div>
+            </div>
+        </div>
+
+         {% endfor %}
+
+    </div>
     
+    <div class="text-end">
+
+
+        {% if app.user %}
+            <a href= "#"> Laisser un commentaire </a>
+
+        {% else %}
+                 <a href= "{{ path('login')}}"> Laisser un commentaire </a>
+
+        {% endif %}
+
+    </div>
+
+
 {% endblock %}
 
 {% block title %}
