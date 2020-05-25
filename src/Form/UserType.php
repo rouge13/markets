@@ -27,7 +27,7 @@ class UserType extends AbstractType
 
                 'first_options'  => [
                     'attr'  => ['class' => ' form-control col'],
-                    'label' => 'Password'
+                    'label' => 'Mot de passe'
                 ],
                 'second_options'=> [
                     'attr'  => ['class' => 'form-control col'],
@@ -37,7 +37,11 @@ class UserType extends AbstractType
             ])
 
 
-            ->add('enregistrer', SubmitType::class ,[ 'attr' => ['class' => 'form-control']]);
+            ->add('enregistrer', SubmitType::class ,[
+                'attr' => [
+                    'class' => 'form-control text-light mt-2',
+                    'style' => 'background-color : #297373'
+                ]]);
         ;
     }
 
