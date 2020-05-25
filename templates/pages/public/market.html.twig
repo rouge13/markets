@@ -84,11 +84,18 @@
 
     </div>
     
-    <div>
+    <div class="text-end">
 
-        
+
+        {% if app.user %}
+            <a href= "#"> Laisser un commentaire </a>
+
+        {% else %}
+                 <a href= "{{ path('login')}}"> Laisser un commentaire </a>
+
+        {% endif %}
+
     </div>
-
 
 
 {% endblock %}
