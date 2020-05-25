@@ -88,7 +88,11 @@
 
 
         {% if app.user %}
-            <a href= "#"> Laisser un commentaire </a>
+            {% for comment in market.commentMarkets %}
+
+                <a href="{{ path('addNewObject', {"name":'comment','userId':comment.user.id }) }}" class="badge badge-primary">Laisser un commentaire</a>
+{#              <a href= "#"> Laisser un commentaire </a>#}
+            {% endfor %}
 
         {% else %}
                  <a href= "{{ path('login')}}"> Laisser un commentaire </a>

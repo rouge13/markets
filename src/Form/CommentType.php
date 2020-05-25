@@ -3,7 +3,10 @@
 namespace App\Form;
 
 use App\Entity\CommentMarket;
+
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,10 +19,15 @@ class CommentType extends AbstractType
         $builder
             ->add('notice',TextType::class, [
                 'label_attr'=>['class'=> 'blue-bg', 'style'=> 'color : black'],
-                'attr' => ['placeholder' => 'Market name']
+                'attr' => ['placeholder' => 'notice name']
             ])
-            ->add('user')
-            ->add('market')
+            ->add('user',IntegerType::class, [
+                'label_attr'=>['class'=> 'blue-bg', 'style'=> 'color : black']
+            ])
+            ->add('market',IntegerType::class, [
+                'label_attr'=>['class'=> 'blue-bg', 'style'=> 'color : black']
+            ])
+            ->add('Commentaire', SubmitType::class);
         ;
     }
 
