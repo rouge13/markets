@@ -36,19 +36,22 @@ Rechercher un marché
                 <thead>
                 <tr>
                     <th scope="col">Nom du marché</th>
+                    <th scope="col">Horaires</th>
                     <th scope="col">Adresse</th>
-                    <th scope="col">Code postal</th>
-                    <th scope="col">Ville </th>
-                    <th> </th>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <th> </th>
+                    {% endif %}
                 </tr>
                 </thead>
                 <tbody>
                 {% for market in markets %}
                 <tr>
                     <td>{{ market.name }}</td>
-                    <td>{{ market.track }}</td>
-                    <td>{{ market.pc }}</td>
-                    <td> {{ market.city }}</td>
+                    <td>{{ market.timeFrom }}H - {{ market.timeTo }}H </td>
+                    <td>{{ market.track }} - {{ market.pc }} {{ market.city }}</td>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <td> <a href="#">Supprimer</a> </td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
 
