@@ -38,8 +38,17 @@ class DefaultController extends AbstractController
         return $this->render('pages/public/login.html.twig');
     }
 
-    public function marketAction(){
-        return $this->render('pages/public/market.html.twig');
+
+
+
+    public function marketAction($id,MarketRepository $marketRepository){
+        $market=$marketRepository->findOneBy([
+            'id'=>$id
+        ]);
+        return $this->render('pages/public/market.html.twig',[
+            'market'=>$market
+        ]);
+
 
     }
 
@@ -82,3 +91,8 @@ class DefaultController extends AbstractController
 
     }
 }
+
+
+
+
+
