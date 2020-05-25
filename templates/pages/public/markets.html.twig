@@ -1,32 +1,69 @@
 {% extends 'pages/public/base.html.twig' %}
 {% block title %}
-
+Rechercher un marché
 {% endblock %}
 
 
 {% block body %}
-<p>markets</p>
+    <h2>Recherches</h2>
+<div class="p-2">
+    {{ form_start(searchMarketForm , {'attr': {'class': 'd-flex col-12 align-items-center justify-content-between'  }}) }}
 
-{{ form(searchMarketForm) }}
+    <div class="form-group col pt-4">
+        Quelle ville ?
+        {{ form_widget(searchMarketForm.city) }}
+    </div>
 
-    {% for market in markets %}
+    <div class="form-button col ">
+        Quels jour(s) ?
+        {{ form_widget(searchMarketForm.day ) }}
 
-        {% for element in market %}
+    </div>
 
-            <p>Nom: {{ element.name }}</p>
+    <div class="form-group pt-5  ">
+        {{ form_widget(searchMarketForm.rechercher) }}
+    </div>
 
+    {{ form_end(searchMarketForm) }}
 
-            <p>{% for day in element.day %}
-                    Jour : {{ day.name }}
+</div>
+
+    {% if app.request.method == 'POST' %}
+        {% if markets |length > 0 %}
+            <p class="font-italic">Résultats pour votre recherche</p>
+
+            <table class="table table-hover ">
+                <thead>
+                <tr>
+                    <th scope="col">Nom du marché</th>
+                    <th scope="col">Horaires</th>
+                    <th scope="col">Adresse</th>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <th> </th>
+                    {% endif %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for market in markets %}
+                <tr>
+                    <td>{{ market.name }}</td>
+                    <td>{{ market.timeFrom }}H - {{ market.timeTo }}H </td>
+                    <td>{{ market.track }} - {{ market.pc }} {{ market.city }}</td>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <td> <a href="#">Supprimer</a> </td>
+                    {% endif %}
+                </tr>
                 {% endfor %}
-            </p>
 
+                </tbody>
+            </table>
 
-        {% endfor %}
+            {% else %}
+                <p class="text-secondary" role="">
+                    Aucun résultat(s) pour votre recherche
+                </p>
 
-    {% endfor %}
+        {% endif  %}
+    {% endif %}
 
 {% endblock %}
-
-
-
