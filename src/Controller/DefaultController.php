@@ -6,17 +6,36 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Repository\MarketRepository;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DefaultController extends AbstractController
 {
-    public function homeAction(MarketRepository $marketRepository){
+    public function homeAction(MarketRepository $marketRepository, UserRepository $userRepository){
         $markets = $marketRepository->findBy(array(),array(),4);
+        $users = $userRepository->findAll();
+        dump($markets);
+        dump($users);
+
         return $this->render('pages/public/home.html.twig',[
-            'markets'=>$markets
+            'markets'=>$markets,
+            'users'=>$users
+        ]);
+
+    }
+
+
+    public function indexAction(Request $request,$userId,UserRepository $userRepository){
+         $user = $userRepository ->find($userId);
+
+
+        return $this->render('pages/public/market.html.twig', [
+            "user" =>$user,
+
         ]);
     }
+
 
     public function aboutAction(Request $request){
         $contact= new Contact();

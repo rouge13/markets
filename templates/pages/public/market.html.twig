@@ -46,7 +46,11 @@
                <td>
                    {% for onetype in onestand.type  %}
                        {{ onetype.name }}
-                   {% endfor %} </td>
+
+                   {% endfor %}
+                   <a href="{{ path('addNewObject', {"name":'type','id':onestand.id }) }}" class="badge badge-primary">+</a>
+               </td>
+
            </tr>
            {% endfor %}
 
@@ -54,6 +58,8 @@
 
            </tbody>
        </table>
+
+       <a href="{{ path('addNewObject', {"name":'stand','id':market.id }) }}" class="badge badge-primary">Ajouter un stand</a>
 
    </div>
 
@@ -86,9 +92,22 @@
     
     <div class="text-end">
 
+{#        {{ dump(user.id) }}#}
+{#        {{ dump(comment) }}#}
+
 
         {% if app.user %}
-            <a href= "#"> Laisser un commentaire </a>
+
+
+                <a href="{{ path('addNewObject', {"name":'comment','id':market.id }) }}" class="badge badge-primary">Laisser un commentaire</a>
+{#                {{ dump(user) }}#}
+{#                {{ dump(market) }}#}
+
+{#                {{ dump(user.id) }}#}
+{#                {{ dump(market.id) }}#}
+
+{#              <a href= "#"> Laisser un commentaire </a>#}
+
 
         {% else %}
                  <a href= "{{ path('login')}}"> Laisser un commentaire </a>
