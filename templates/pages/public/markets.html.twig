@@ -50,7 +50,7 @@ Rechercher un marché
                     <td>{{ market.timeFrom }}H - {{ market.timeTo }}H </td>
                     <td>{{ market.track }} - {{ market.pc }} {{ market.city }}</td>
                     {% if is_granted('ROLE_ADMIN') %}
-                    <td> <a href="#">Supprimer</a> </td>
+                        <td><a href="{{ path('deleteObject', {'id': market.id , "name":'market' }) }}">Supprimer</a> </td>
                     {% endif %}
                 </tr>
                 {% endfor %}
