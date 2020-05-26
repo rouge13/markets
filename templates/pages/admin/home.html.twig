@@ -1,0 +1,138 @@
+{% extends 'pages/admin/admin_base.html.twig'  %}
+
+{% block title %}
+Espace admin
+{% endblock %}
+
+{% block body %}
+
+
+    {% if markets is defined %}
+        <h2 class="mt-5">Marchés</h2>
+
+    {#        début formulaire de recherche -- #}
+        <div class="p-2 mt-2">
+            {{ form_start(searchMarketForm , {'attr': {'class': 'd-flex col-12 align-items-center justify-content-between'  }}) }}
+
+            <div class="form-group col pt-4">
+                Quelle ville ?
+                {{ form_widget(searchMarketForm.city) }}
+            </div>
+
+            <div class="form-button col ">
+                Quels jour(s) ?
+                {{ form_widget(searchMarketForm.day ) }}
+
+            </div>
+
+            <div class="form-group pt-5  ">
+                {{ form_widget(searchMarketForm.rechercher) }}
+            </div>
+
+            {{ form_end(searchMarketForm) }}
+
+        </div>
+
+{#        -- fin de formulaire de recherche #}
+
+{#        début affichage des resultats#}
+
+        {% if app.request.method == 'POST' %}
+            {% if markets |length > 0 %}
+                <p class="font-italic">Résultats pour votre recherche</p>
+
+                <table class="table table-hover ">
+                    <thead>
+                    <tr>
+                        <th scope="col">Nom du marché</th>
+                        <th scope="col">Horaires</th>
+                        <th scope="col">Adresse</th>
+                        <th> </th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for market in markets %}
+                        <tr>
+                            <td>{{ market.name }}</td>
+                            <td>{{ market.timeFrom }}H - {{ market.timeTo }}H </td>
+                            <td>{{ market.track }} - {{ market.pc }} {{ market.city }}</td>
+                            <td> <a href="#">Supprimer</a> </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+
+            {% else %}
+                <p class="text-secondary" role="">
+                    Aucun résultat(s) pour votre recherche
+                </p>
+
+
+
+            {% endif  %}
+
+        {% endif %}
+
+{#        -- fin affichage des résultats#}
+
+
+
+    {% elseif users is defined %}
+
+        <h2 class="mt-5">Utilisateurs</h2>
+
+        <table class="table mt-2">
+            <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Pseudo</th>
+                <th scope="col">Email</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>Supprimer</td>
+                    <td {% if user.roles == '["ROLE_ADMIN"]' %} class="text-danger"{% endif %}> {{ user.alias }}</td>
+                    <td> {{ user.username }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+    {% else %}
+        <h2 class="mt-5">Messages</h2>
+
+        <table class="table mt-2">
+            <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Expéditeur</th>
+                <th scope="col">Objet</th>
+                <th scope="col">Message</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for message in messages %}
+                <tr>
+                    <td>Supprimer</td>
+                    <td> {{ message.email }} </td>
+                    <td> {{ message.obmessage }} </td>
+                    <td> {{ message.message }} </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+
+
+
+    {% endif %}
+
+{% endblock %}
