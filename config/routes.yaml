@@ -26,6 +26,10 @@ addNewObject:
     path: /add/{name}
     controller: App\Controller\NewObjectController::newObjectAction
 
+dashboard:
+    path : /admin/dashboard
+    controller: App\Controller\AdminController::adminAction
+
 
 
 

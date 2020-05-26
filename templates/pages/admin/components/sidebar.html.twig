@@ -1,0 +1,16 @@
+<p class="my-4">Bienvenue {{ app.user.username }}</p>
+
+<div>
+    <p style="font-weight: bold;">Pages</p>
+    <ul>
+        <li><a href="{{path('home')}}" class="text-warning">Page d'accueil</a></li>
+        <li><a href="{{ path('markets') }}" class="text-warning" > Recherche de marchés</a> </li>
+    </ul>
+
+</div>
+
+<p>
+    <small>
+        <a href="{{ path('app_logout') }}" class=" btn text-light btn-danger mt-3" style="font-weight: bold;">Déconnexion</a>
+    </small>
+</p>
