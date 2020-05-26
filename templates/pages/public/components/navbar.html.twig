@@ -8,10 +8,44 @@
         <ul class="navbar-nav mr-auto">
 
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <a href="{{ path('markets') }}" class="btn btn-light border mr-4">Trouver un marché</a>
-            <a href="{{ path('registration') }}" class="btn btn-warning mr-5 ">Nous rejoindre</a>
-            <a href="{{ path('app_login') }}" class="btn btn-warning mr-5 ">Se connecter</a>
-        </form>
+        <div class="form-inline my-2 my-lg-0">
+            <a href="{{ path('markets') }}" class="btn btn-light border mx-2">Trouver un marché</a>
+
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER')  %}
+                <div class="dropdown">
+                    <button class="btn btn-warning dropdown-toggle px-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {% if is_granted('ROLE_ADMIN') %}
+                            Administration
+
+                            {% elseif  is_granted('ROLE_USER') %}
+                            Mon compte
+                        {% endif %}
+                    </button>
+
+                    <div class="dropdown-menu">
+                        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER')  %}
+                            <p class="dropdown-item text-primary">{{ app.user.username }}</p>
+                        {% endif %}
+
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a class="dropdown-item"  href=" {{ path('dashboard') }}">Espace admin</a>
+                            <a class="dropdown-item font-weight-bold" href=" {{ path('app_logout') }}">Déconnexion</a>
+
+
+                        {% elseif  is_granted('ROLE_USER') %}
+                            <a class="dropdown-item" href="#">Mes informations</a>
+                            <a class="dropdown-item font-weight-bold" href=" {{ path('app_logout') }}">Déconnexion</a>
+
+                        {% endif %}
+
+                    </div>
+                </div>
+
+            {% else %}
+                <a href="{{ path('registration') }}" class="btn btn-warning mx-2 ">Nous rejoindre</a>
+                <a href="{{ path('app_login') }}" class="btn btn-warning mx-2 ">Se connecter</a>
+            {% endif %}
+
+        </div>
     </div>
 </nav>
