@@ -40,6 +40,7 @@ class StandType extends AbstractType
             ])
             ->add('type', EntityType::class, [
                 'class' => Type::class,
+                'required'=>false,
                 'multiple'=>true,
                 'expanded'=>true,
                 'label_attr'=>['class'=> 'blue-bg', 'style'=> 'color : black'],
