@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UpdateInformationUserType;
+use App\Repository\MarketRepository;
 use App\Repository\UserRepository;
 use App\Service\FormsManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,7 +16,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UpdateController extends AbstractController
 {
 
-    public function updateAction(Request $request,$name, $id, UserRepository $userRepository, UserPasswordEncoderInterface $passwordEncoder){
+    public function updateAction(Request $request,$name, $id, UserRepository $userRepository, UserPasswordEncoderInterface $passwordEncoder , MarketRepository $marketRepository){
 
 
         $form = null;
@@ -44,8 +45,22 @@ class UpdateController extends AbstractController
                     return $this->redirectToRoute('home');
                 }
                 break;
+
+            case 'market':
+                $market = $marketRepository->find($id);
+                $form = $this->createForm('App\Form\MarketType',$market);
+                $form->handleRequest($request);
+                if($form->isSubmitted()) {
+                    $market = $form->getData();
+                    $manager->persist($market);
+                    $manager->flush();
+                    return $this->redirectToRoute('home');
+                }
+                break;
+
+
         }
-        return $this->render('pages/public/informations.html.twig',["id"=>$id, "name" =>$name ,"form"=>$form->createView()]);
+        return $this->render('pages/public/updateObject.html.twig',["id"=>$id, "name" =>$name ,"form"=>$form->createView()]);
 
     }
 

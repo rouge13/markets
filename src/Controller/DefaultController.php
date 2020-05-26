@@ -72,7 +72,7 @@ class DefaultController extends AbstractController
     }
 
     public function informationsAction(){
-        return $this->render('pages/public/informations.html.twig');
+        return $this->render('updateObject.html.twig');
     }
 
     public function marketsAction(Request $request  , MarketRepository $marketRepository){

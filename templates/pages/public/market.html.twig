@@ -4,6 +4,9 @@
 
     <div class="p-4">
         <h1> {{ market.name}} </h1>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('updateObject', {"name":'market','id': market.id }) }}">Editer</a>
+        {% endif %}
         <div class="row">
             <h3 class="col-md-6"> Jour(s)  {% for day in market.day  %} {{ day.name }},  {% endfor %}</h3>
             <h3 class="col-md-6"> Adresse: {{ market.region}} {{ market.city}} {{ market.pc}} {{ market.track}}  </h3>
@@ -48,20 +51,24 @@
                        {{ onetype.name }}
 
                    {% endfor %}
-                   <a href="{{ path('addNewObject', {"name":'type','id':onestand.id }) }}" class="badge badge-primary">+</a>
+
+                   {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
+                        <a href="{{ path('addNewObject', {"name":'type','id':onestand.id }) }}" class="badge badge-primary">+</a>
+                   {% endif %}
+
                </td>
 
            </tr>
            {% endfor %}
 
-
-
            </tbody>
        </table>
 
-       <a href="{{ path('addNewObject', {"name":'stand','id':market.id }) }}" class="badge badge-primary">Ajouter un stand</a>
-
    </div>
+
+    {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('addNewObject', {"name":'stand','id':market.id }) }}" class="badge badge-primary">Ajouter un stand</a>
+    {% endif %}
 
 
     <div class="row justify-content-center">
