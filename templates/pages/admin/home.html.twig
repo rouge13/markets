@@ -57,7 +57,8 @@ Espace admin
                             <td>{{ market.name }}</td>
                             <td>{{ market.timeFrom }}H - {{ market.timeTo }}H </td>
                             <td>{{ market.track }} - {{ market.pc }} {{ market.city }}</td>
-                            <td> <a href="#">Supprimer</a> </td>
+                            <td><a href="{{ path('deleteObject', {'id': market.id , "name":'market' }) }}">Supprimer</a> </td>
+
                         </tr>
                     {% endfor %}
 
@@ -95,7 +96,7 @@ Espace admin
             <tbody>
             {% for user in users %}
                 <tr>
-                    <td>Supprimer</td>
+                    <td><a href="{{ path('deleteObject', {'id': user.id , "name":'user' }) }}">Supprimer</a> </td>
                     <td {% if user.roles == '["ROLE_ADMIN"]' %} class="text-danger"{% endif %}> {{ user.alias }}</td>
                     <td> {{ user.username }}</td>
                 </tr>
@@ -120,7 +121,7 @@ Espace admin
             <tbody>
             {% for message in messages %}
                 <tr>
-                    <td>Supprimer</td>
+                    <td><a href="{{ path('deleteObject', {'id': message.id , "name":'message' }) }}">Supprimer</a> </td>
                     <td> {{ message.email }} </td>
                     <td> {{ message.obmessage }} </td>
                     <td> {{ message.message }} </td>

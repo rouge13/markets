@@ -45,3 +45,7 @@ adminShowMessages :
 updateObject:
     path: /update/{name}/{id}
     controller: App\Controller\UpdateController::updateAction
+
+deleteObject :
+    path: /admin/delete/{id}/{name}
+    controller: App\Controller\DeleteController::deleteAction
