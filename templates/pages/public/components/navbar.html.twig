@@ -33,7 +33,7 @@
 
 
                         {% elseif  is_granted('ROLE_USER') %}
-                            <a class="dropdown-item" href="#">Mes informations</a>
+                            <a class="dropdown-item" href="{{ path('updateObject', {"name":'information','id':app.user.id }) }}">Mes informations</a>
                             <a class="dropdown-item font-weight-bold" href=" {{ path('app_logout') }}">Déconnexion</a>
 
                         {% endif %}

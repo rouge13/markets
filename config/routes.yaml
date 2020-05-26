@@ -41,3 +41,7 @@ adminShowUsers:
 adminShowMessages :
     path: /admin/showMessages
     controller: App\Controller\AdminController::showMessages
+
+updateObject:
+    path: /update/{name}/{id}
+    controller: App\Controller\UpdateController::updateAction
