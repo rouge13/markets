@@ -30,6 +30,14 @@ dashboard:
     path : /admin/dashboard
     controller: App\Controller\AdminController::adminAction
 
+adminShowMarkets:
+    path : /admin/showMarkets
+    controller: App\Controller\AdminController::showMarkets
 
+adminShowUsers:
+    path : /admin/showUsers
+    controller: App\Controller\AdminController::showUsers
 
-
+adminShowMessages :
+    path: /admin/showMessages
+    controller: App\Controller\AdminController::showMessages
