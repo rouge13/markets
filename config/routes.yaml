@@ -23,7 +23,7 @@ informations:
     controller: App\Controller\DefaultController::informationsAction
 
 addNewObject:
-    path: /add/{name}/{userId}
+    path: /add/{name}/{id}
     controller: App\Controller\NewObjectController::newObjectAction
 
 

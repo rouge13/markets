@@ -19,16 +19,18 @@ class StandType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : white'],
+                'label_attr'=>['class'=> 'blue-bg', 'style'=> 'color : black'],
                 'attr' => ['placeholder' => 'description']
             ])
             ->add('description', TextType::class, [
-                'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : white'],
+                'required'   => false,
+                'label_attr'=>['class'=> 'blue-bg', 'style'=> 'color : black'],
                 'attr' => ['placeholder' => 'description']
             ])
             ->add('link', TextType::class, [
-                'label_attr'=>['class'=> 'red-bg', 'style'=> 'color : white'],
-                'attr' => ['placeholder' => 'description']
+                'required'   => false,
+                'label_attr'=>['class'=> 'blue-bg', 'style'=> 'color : black'],
+                'attr' => ['placeholder' => 'link']
             ])
             ->add('image',FileType::class, [
                 'mapped'=>false,
@@ -36,7 +38,6 @@ class StandType extends AbstractType
                 'label_attr'=>['class'=> 'blue-bg', 'style'=> 'color : black'],
                 'attr' => ['placeholder' => 'image']
             ])
-            ->add('markets')
             ->add('type', EntityType::class, [
                 'class' => Type::class,
                 'multiple'=>true,
@@ -45,7 +46,7 @@ class StandType extends AbstractType
                 'choice_label' => 'name',
                 'attr'=>['class'=>'row m-4 d-flex justify-content-around','style'=>'color : black']
             ])
-            ->add('Ajouter stand', SubmitType::class);
+            ->add("Ajouter", SubmitType::class);
         ;
     }
 
