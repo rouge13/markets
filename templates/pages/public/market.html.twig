@@ -4,6 +4,9 @@
 
     <div class="p-4">
         <h1> {{ market.name}} </h1>
+        {% if is_granted('ROLE_USER') %}
+            <a href="{{ path('updateObject', {"name":'market','id': market.id }) }}">Editer</a>
+        {% endif %}
         <div class="row">
             <h3 class="col-md-6"> Jour(s)  {% for day in market.day  %} {{ day.name }},  {% endfor %}</h3>
             <h3 class="col-md-6"> Adresse: {{ market.region}} {{ market.city}} {{ market.pc}} {{ market.track}}  </h3>
