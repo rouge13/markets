@@ -63,7 +63,10 @@ Rechercher un marché
                     Aucun résultat(s) pour votre recherche
                 </p>
 
+
+
         {% endif  %}
+        <a href="{{ path('addNewObject', {"name":'market','id':app.user.id }) }}" class="badge badge-primary">Ajouter un marché inexistant</a>
     {% endif %}
 
 {% endblock %}

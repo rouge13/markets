@@ -54,14 +54,6 @@ class MarketType extends AbstractType
                 'choice_label' => 'name',
                 'attr'=>['class'=>'row m-4 d-flex justify-content-around','style'=>'color : black']
             ])
-            ->add('stand',EntityType::class, [
-                'class' => Stand::class,
-                'multiple'=>true,
-                'expanded'=>true,
-                'label_attr'=>['class'=> 'blue-bg', 'style'=> 'color : black'],
-                'choice_label' => 'name',
-                'attr'=>['class'=>'row m-4 d-flex justify-content-around','style'=>'color : black']
-            ])
             ->add('Ajouter', SubmitType::class, [
                 'attr' => ['class' => 'save', 'style' => 'color : black'],
             ])
