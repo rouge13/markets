@@ -22,21 +22,21 @@ class DeleteController extends AbstractController
                 $market = $marketRepository->find($id);
                 $manager->remove($market);
                 $manager->flush();
-                return $this->redirectToRoute('home');
+                return $this->redirectToRoute('dashboard');
                 break;
 
             case 'user':
                 $user = $userRepository->find($id);
                 $manager->remove($user);
                 $manager->flush();
-                return $this->redirectToRoute('home');
+                return $this->redirectToRoute('dashboard');
                 break;
 
             case 'message':
                 $message = $contactRepository->find($id);
                 $manager->remove($message);
                 $manager->flush();
-                return $this->redirectToRoute('home');
+                return $this->redirectToRoute('dashboard');
                 break;
 
 

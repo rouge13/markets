@@ -15,15 +15,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UpdateController extends AbstractController
 {
-
     public function updateAction(Request $request,$name, $id, UserRepository $userRepository, UserPasswordEncoderInterface $passwordEncoder , MarketRepository $marketRepository){
-
 
         $form = null;
         $manager = $this->getDoctrine()->getManager();
 
         switch ($name) {
-            case 'information':
+            case 'informations':
 
                 $user = $userRepository->find($id);
                 $form = $this->createForm(UpdateInformationUserType::class, $user);
@@ -46,7 +44,7 @@ class UpdateController extends AbstractController
                 }
                 break;
 
-            case 'market':
+            case 'marché':
                 $market = $marketRepository->find($id);
                 $form = $this->createForm('App\Form\MarketType',$market);
                 $form->handleRequest($request);

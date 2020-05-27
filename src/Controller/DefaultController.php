@@ -12,16 +12,43 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DefaultController extends AbstractController
 {
-    public function homeAction(MarketRepository $marketRepository, UserRepository $userRepository){
-        $markets = $marketRepository->findBy(array(),array(),4);
-        $users = $userRepository->findAll();
-        dump($markets);
-        dump($users);
+    public function homeAction(MarketRepository $marketRepository, UserRepository $userRepository , Request $request){
+        $showMarkets = $marketRepository->findBy(array(),array(),4);
 
-        return $this->render('pages/public/home.html.twig',[
-            'markets'=>$markets,
-            'users'=>$users
+
+        // build the form
+        $searchMarketForm = $this->createForm('App\Form\SearchMarketType');
+        $searchMarketForm->handleRequest($request);
+
+        $markets = array();
+
+        if($searchMarketForm->isSubmitted()  && $searchMarketForm->isValid() ){
+            $criteria = $searchMarketForm->getData();
+
+            foreach($criteria->getDay() as $day) {
+                $market = $marketRepository->findByCityAndDay($criteria, $day);
+                //dump($market);
+                foreach ($market as $obj) {
+                    dump($obj);
+                    array_push($markets, $obj);
+                }
+
+                return $this->render(
+                    'pages/public/markets.html.twig', [
+                    "searchMarketForm" => $searchMarketForm->createView(),
+                    "markets"=>array_unique($markets, SORT_REGULAR)
+                ]);
+            }
+        }
+
+
+        return $this->render(
+            'pages/public/home.html.twig', [
+                "markets"=>$showMarkets,
+            "searchMarketForm" => $searchMarketForm->createView(),
         ]);
+
+
 
     }
 
@@ -86,19 +113,13 @@ class DefaultController extends AbstractController
         if($searchMarketForm->isSubmitted()  && $searchMarketForm->isValid() ){
             $criteria = $searchMarketForm->getData();
 
-//            foreach($criteria->getDay() as $day){
-//                dump($day->getName());
-//           }
-
-
             foreach($criteria->getDay() as $day) {
                 $market = $marketRepository->findByCityAndDay($criteria, $day);
-                //dump($market);
+
                 foreach ($market as $obj) {
-                    dump($obj);
                     array_push($markets, $obj);
                 }
-                //dump($markets);
+
             }
         }
 

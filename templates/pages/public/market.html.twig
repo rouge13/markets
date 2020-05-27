@@ -1,132 +1,82 @@
 {% extends 'pages/public/base.html.twig' %}
 
 {% block body %}
-
-    <div class="p-4">
-        <h1> {{ market.name}} </h1>
+    <div class="d-flex align-items-center mt-4">
+        <p class="titles font-weight-bold">{{ market.name}}</p>
         {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('updateObject', {"name":'market','id': market.id }) }}">Editer</a>
+            <a class="ml-4" href="{{ path('updateObject', {"name":'marché','id': market.id }) }}">Editer</a>
         {% endif %}
-        <div class="row">
-            <h3 class="col-md-6"> Jour(s)  {% for day in market.day  %} {{ day.name }},  {% endfor %}</h3>
-            <h3 class="col-md-6"> Adresse: {{ market.region}} {{ market.city}} {{ market.pc}} {{ market.track}}  </h3>
+    </div>
 
+    <div class="my-3">
+        <div class="row justify-content-between">
+            <p class="col-md-6"><span class="font-weight-bold">Jour(s) :</span> {% for day in market.day  %} {{ day.name }},  {% endfor %}</p>
+            <p class="col-md-6"><span class="font-weight-bold">Adresse :</span>  {{ market.track}} - {{ market.pc}} {{ market.city}} ({{ market.region}}) </p>
+        </div>
+        <p><span class="font-weight-bold">Horaires :</span> {{market.timeFrom}}h - {{ market.timeTo}}h </p>
+    </div>
 
+    <div class="mt-5 mb-3">
+        <div class="d-flex align-items-center"><p style="font-size: 1.5em;">Liste des marchands </p>
+            {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
+                <p><a href="{{ path('addNewObject', {"name":'stand','id':market.id }) }}" class="badge badge-primary ml-2">Ajouter un stand</a></p>
+            {% endif %}
         </div>
 
-        <div class="row">
+        <table class="table border">
+            <thead>
+            <tr>
+                <th scope="col">Nom de l'exposant</th>
+                <th scope="col">Type de produits</th>
+            </tr>
+            </thead>
 
-            <h3 class="col-md-6"> Horaires: {{market.timeFrom}}h - {{ market.timeTo}}h </h3>
+            <tbody>
+            {% for onestand in market.stand  %}
+                <tr>
+                    <th> <a href="#">{{ onestand.name }}</a> </th>
+                    <td>
+                        {% for onetype in onestand.type  %}
+                            {{ onetype.name }}
+                        {% endfor %}
 
-        </div>
+                        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
+                            <a href="{{ path('addNewObject', {"name":'type','id':onestand.id }) }}" class="badge badge-primary ml-3">+</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-        <div class="row">
-
-            <H3 class="col-md-6">  Liste des marchands </H3>
-
-        </div>
 
     </div>
 
-   <div class="row justify-content-center my-5">
+    <div class="my-5">
+        <div class="d-flex align-items-center">
+            <p style="font-size: 1.5em;">Avis </p>
+            {% if app.user %}
+                <p><a href="{{ path('addNewObject', {"name":'comment','id':market.id }) }}" class="badge badge-primary ml-4">+</a></p>
+            {% else %}
+                <p><a class="ml-4 badge badge-primary" href= "{{ path('login')}}">+</a></p>
+            {% endif %}
 
-       <table class="col-md-6 table border">
-           <thead>
-           <tr>
-               <th scope="col">Nom de l'exposant</th>
-               <th scope="col">Type de produits</th>
-
-           </tr>
-           </thead>
-           <tbody>
-
-
-           {% for onestand in market.stand  %} <tr>
-               <th scope="row">
-                   {{ onestand.name }} </th>
+        </div>
 
 
-               <td>
-                   {% for onetype in onestand.type  %}
-                       {{ onetype.name }}
-
-                   {% endfor %}
-
-                   {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
-                        <a href="{{ path('addNewObject', {"name":'type','id':onestand.id }) }}" class="badge badge-primary">+</a>
-                   {% endif %}
-
-               </td>
-
-           </tr>
-           {% endfor %}
-
-           </tbody>
-       </table>
-
-   </div>
-
-    {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
-        <a href="{{ path('addNewObject', {"name":'stand','id':market.id }) }}" class="badge badge-primary">Ajouter un stand</a>
-    {% endif %}
-
-
-    <div class="row justify-content-center">
-        <h2 class="col-md-12 text-center"> Avis  </h2>
         {% for comment in market.commentMarkets %}
-        <div class="col-8 my-2">
-            <div class="p-2 card card-white post">
-                <div class="post-heading">
-                    <div class="float-left image">
-
-                    </div>
-                    <div class="float-left meta">
-                        <div class="text-dark title h5">
-                          <b>{{ comment.user.alias }}</b>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="text-dark post-description p-2">
-                    <p>{{ comment.notice }}</p>
+            <div class="my-3">
+                <div class="py-2 pl-3">
+                    <div class="font-weight-bold">{{ comment.user.alias }}</div>
+                    <small class="ml-2">{{ comment.notice }}</small>
                 </div>
             </div>
-        </div>
-
-         {% endfor %}
-
+        {% endfor %}
     </div>
-    
-    <div class="text-end">
-
-{#        {{ dump(user.id) }}#}
-{#        {{ dump(comment) }}#}
-
-
-        {% if app.user %}
-
-
-                <a href="{{ path('addNewObject', {"name":'comment','id':market.id }) }}" class="badge badge-primary">Laisser un commentaire</a>
-{#                {{ dump(user) }}#}
-{#                {{ dump(market) }}#}
-
-{#                {{ dump(user.id) }}#}
-{#                {{ dump(market.id) }}#}
-
-{#              <a href= "#"> Laisser un commentaire </a>#}
-
-
-        {% else %}
-                 <a href= "{{ path('login')}}"> Laisser un commentaire </a>
-
-        {% endif %}
-
-    </div>
-
 
 {% endblock %}
 
 {% block title %}
-
+    {{ market.name }}
 {% endblock %}
 

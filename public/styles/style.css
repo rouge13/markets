@@ -1,6 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Prata&family=Roboto:wght@300&display=swap');
+
 .formNewMarket{
-    background-size: 100%;
-    background-image: linear-gradient(rgb(255, 255, 255), rgb(194, 205, 215))
+
 }
+
+.homeCarousel{
+    height: 46vh;
+    object-fit: cover;
+}
+
+.prata{
+    font-family: 'Prata', serif;
+}
+
+.titleHome{
+    font-size: 5em;
+}
+
+.titles{
+    font-size: 2em;
+}
+.fontSizeSearchForm{
+    font-size: 1.5em;
+}
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+#content-wrap {
+    padding-bottom: 8rem;    /* Footer height */
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.headerHome{
+    height : 20vh;
+    width: 100%;
+    background-image: url("https://images.unsplash.com/photo-1533900298318-6b8da08a523e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80") ;
+    background-size: cover ;
+    background-repeat: no-repeat ;
+    background-position: center;
+}
+
+.justifyText{
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.yellow-bg{
+    background-color: #E9D758;
+}
+
+
+
+
+
 
 

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#297373">
-    <a class="navbar-brand" href="/"><img src="https://www.destination-vendeegrandlittoral.com/wp-content/uploads/2018/03/Panier-de-march%C3%A9-Cr%C3%A9dit-dessin-%C2%A9-MARCELINE-Communication.jpg" alt="" width="70px" height="70px" style="border-radius: 50%" > </a>
+    <a class="navbar-brand" href="/"><img src="https://cdn.pixabay.com/photo/2020/04/14/18/55/market-5043905_960_720.png" alt="" width="70px" height="70px" style="border-radius: 0%" > </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -13,7 +13,7 @@
 
             {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER')  %}
                 <div class="dropdown">
-                    <button class="btn btn-warning dropdown-toggle px-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn yellow-bg dropdown-toggle px-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {% if is_granted('ROLE_ADMIN') %}
                             Administration
 
@@ -29,11 +29,12 @@
 
                         {% if is_granted('ROLE_ADMIN') %}
                             <a class="dropdown-item"  href=" {{ path('dashboard') }}">Espace admin</a>
+                            <a class="dropdown-item" href="{{ path('updateObject', {"name":'informations','id':app.user.id }) }}">Mes informations</a>
                             <a class="dropdown-item font-weight-bold" href=" {{ path('app_logout') }}">Déconnexion</a>
 
 
                         {% elseif  is_granted('ROLE_USER') %}
-                            <a class="dropdown-item" href="{{ path('updateObject', {"name":'information','id':app.user.id }) }}">Mes informations</a>
+                            <a class="dropdown-item" href="{{ path('updateObject', {"name":'informations','id':app.user.id }) }}">Mes informations</a>
                             <a class="dropdown-item font-weight-bold" href=" {{ path('app_logout') }}">Déconnexion</a>
 
                         {% endif %}
@@ -42,8 +43,8 @@
                 </div>
 
             {% else %}
-                <a href="{{ path('registration') }}" class="btn btn-warning mx-2 ">Nous rejoindre</a>
-                <a href="{{ path('app_login') }}" class="btn btn-warning mx-2 ">Se connecter</a>
+                <a href="{{ path('registration') }}" class="btn yellow-bg mx-2 ">Nous rejoindre</a>
+                <a href="{{ path('app_login') }}" class="btn yellow-bg mx-2 ">Se connecter</a>
             {% endif %}
 
         </div>

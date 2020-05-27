@@ -16,9 +16,12 @@ class TypeType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label_attr'=>['class'=> 'blue-bg', 'style'=> 'color : black'],
-                'attr' => ['placeholder' => 'name']
+                'attr' => ['placeholder' => 'Ecrire ici'],
+                'label' => 'Nom'
             ])
-            ->add('Ajouter', SubmitType::class)
+            ->add('Ajouter', SubmitType::class , [
+                'label' => 'Ajouter un stand'
+            ])
         ;
 
     }
