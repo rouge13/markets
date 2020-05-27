@@ -23,7 +23,7 @@ class NewObjectController extends AbstractController
     {
         $form = null;
         switch ($name) {
-            case 'market':
+            case 'marché':
                 $form = $this->createForm('App\Form\MarketType');
                 $form->handleRequest($request);
                 if ($form->isSubmitted()) {

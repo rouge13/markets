@@ -1,15 +1,11 @@
 {% extends 'pages/public/base.html.twig' %}
 
 {% block body %}
-    <div class="container-fluid">
 
+    <p class="prata titles mt-5" style="color: black">Ajouter un {{ name }}</p>
 
-            <h2 class="text-center" style="color: black">Formulaire de {{ name }}</h2>
-
-            <div class="container-fluid formNewMarket rounded">
-                {{ form(form) }}
-            </div>
-
+    <div class="mt-4 ">
+        {{ form(form) }}
     </div>
 
 {% endblock %}

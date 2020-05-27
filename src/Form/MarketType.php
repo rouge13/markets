@@ -20,31 +20,39 @@ class MarketType extends AbstractType
         $builder
             ->add('name',TextType::class, [
                 'label_attr'=>['class'=> 'blue-bg', 'style'=> 'color : black'],
-                'attr' => ['placeholder' => 'Market name']
+                'attr' => ['placeholder' => 'exemple : Marché de la mairie'],
+                'label' => 'Nom'
             ])
             ->add('track',TextType::class, [
                 'label_attr'=>['class'=> 'blue-bg', 'style'=> 'color : black'],
-                'attr' => ['placeholder' => 'Voie']
+                'attr' => ['placeholder' => 'exemple : Rue des tulipes'],
+                'label' => 'Voie',
+
             ])
             ->add('pc', IntegerType::class, [
                 'label_attr'=>['class'=> 'blue-bg', 'style'=> 'color : black'],
-                'attr' => ['placeholder' => 'Code postal']
+                'label' => 'Code postal',
+                'attr' => ['placeholder' => 'code postal']
             ])
             ->add('city', TextType::class, [
                 'label_attr'=>['class'=> 'blue-bg', 'style'=> 'color : black'],
-                'attr' => ['placeholder' => 'Ville']
+                'attr' => ['placeholder' => 'ville'],
+                'label' => 'Ville'
             ])
             ->add('region', TextType::class, [
                 'label_attr'=>['class'=> 'blue-bg', 'style'=> 'color : black'],
-                'attr' => ['placeholder' => 'Région']
+                'attr' => ['placeholder' => 'région'],
+                'label' => 'Région'
             ])
             ->add('time_from', IntegerType::class, [
                 'label_attr'=>['class'=> 'blue-bg', 'style'=> 'color : black'],
-                'attr' => ['placeholder' => 'De']
+                'attr' => ['placeholder' => 'de'],
+                'label' => 'Heure de début'
             ])
             ->add('time_to', IntegerType::class, [
                 'label_attr'=>['class'=> 'blue-bg', 'style'=> 'color : black'],
-                'attr' => ['placeholder' => 'A']
+                'attr' => ['placeholder' => 'à'],
+                'label' => 'Heure de fin'
             ])
             ->add('day',EntityType::class, [
                 'class' => Day::class,
@@ -52,11 +60,12 @@ class MarketType extends AbstractType
                 'expanded'=>true,
                 'label_attr'=>['class'=> 'blue-bg', 'style'=> 'color : black'],
                 'choice_label' => 'name',
-                'attr'=>['class'=>'row m-4 d-flex justify-content-around','style'=>'color : black']
+                'attr'=>['class'=>'row m-4 d-flex justify-content-around','style'=>'color : black'],
+                'label'=>'Jour(s) de marché'
             ])
-            ->add('Ajouter', SubmitType::class, [
-                'attr' => ['class' => 'save', 'style' => 'color : black'],
-            ])
+            ->add('Ajouter', SubmitType::class , [
+                'label' =>  'Valider'
+            ] )
         ;
     }
 

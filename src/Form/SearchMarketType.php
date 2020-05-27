@@ -19,7 +19,7 @@ class SearchMarketType extends AbstractType
         $builder
 
             ->add('city' , TextType::class , [
-                'attr' => ['placeholder' => 'Ville ?']
+                'attr' => ['placeholder' => 'Entrer le nom de la ville ']
                 ])
 
             ->add('day', EntityType::class , [
@@ -27,12 +27,14 @@ class SearchMarketType extends AbstractType
                 'multiple'=>true,
                 'expanded'=>true ,
                 'choice_label' => 'name',
-                'attr' => ['class' => 'row justify-content-between px-3 ']
+                'attr' => [
+                    'class' => 'row justify-content-between px-3'
+                ]
             ])
 
             ->add('rechercher', SubmitType::class, [
                 'attr'=> ['style' => 'background-color: #E9D758' ,
-                    'class'=> 'border-white px-2']
+                    'class'=> 'border-white ']
             ] );
     }
 
